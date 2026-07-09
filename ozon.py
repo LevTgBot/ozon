@@ -32,8 +32,8 @@ with sync_playwright() as p:
         time.sleep(1)
 
     time.sleep(1)
-    soup = BeautifulSoup(page.content(), 'html.parser')
-    elements = soup.find_all('span', class_='tsHeadline600Large')
-    print(elements.text)
+    #soup = BeautifulSoup(page.content(), 'html.parser')
+    #elements = soup.find_all('span', class_='tsHeadline600Large')
+    print(page.content())
     browser.close()
     display.stop()
