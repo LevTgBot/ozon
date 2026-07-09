@@ -15,6 +15,7 @@ with sync_playwright() as p:
     stealth.use_sync(p)
     browser = p.chromium.launch(
     headless=False,
+    no_viewport=True,
     proxy={
         "server": "http://93.77.191.156:8118"
     },
