@@ -1,4 +1,5 @@
 from playwright.sync_api import sync_playwright
+from playwright_stealth import stealth_sync
 import time
 from bs4 import BeautifulSoup
 from pyvirtualdisplay import Display
@@ -26,6 +27,7 @@ with sync_playwright() as p:
     )
 
     page = context.new_page()
+    stealth_sync(page)
     print("Открываю Ozon...")
     page.goto("https://www.ozon.ru/product/koshachya-myata-sharik-igrushki-dlya-koshek-3168418801/", wait_until="domcontentloaded")
     while page.title() == "Antibot Challenge Page":
