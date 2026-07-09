@@ -19,8 +19,8 @@ with sync_playwright() as p:
 
     page = context.new_page()
     print("Открываю Ozon...")
-    page.goto("https://www.ozon.ru/product/koshachya-myata-sharik-igrushki-dlya-koshek-3168418801/", wait_until="domcontentloaded")
-    print(page.title())
+    page.goto("https://www.google.com/", wait_until="domcontentloaded")
+    print(page)
     #while page.title() == "Antibot Challenge Page":
     #    time.sleep(1)
 
