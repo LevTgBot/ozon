@@ -3,7 +3,7 @@ import time
 from bs4 import BeautifulSoup
 
 with sync_playwright() as p:
-   browser = p.chromium.launch(
+    browser = p.chromium.launch(
     headless=True,  # Для работы на сервере без экрана
     args=[
         "--disable-blink-features=AutomationControlled",
