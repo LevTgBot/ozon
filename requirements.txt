@@ -1,4 +1,2 @@
-playwright
-playwright-stealth
-beautifulsoup4
+camoufox
 pyvirtualdisplay
