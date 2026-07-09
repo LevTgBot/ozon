@@ -1,21 +1,30 @@
-import requests
-from bs4 import BeautifulSoup
+from playwright.sync_api import sync_playwright
 import time
+from bs4 import BeautifulSoup
 
-headers = {
-    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
-    "Accept-Language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
-}
+with sync_playwright() as p:
+    browser = p.chromium.launch(
+    headless=True,
+    args=[
+        "--disable-blink-features=AutomationControlled",
+        "--no-sandbox",             # Обязательно для root в Linux
+        "--disable-setuid-sandbox"  # Дополнительная изоляция для Linux
+    ]
+    )
 
-print("Отправляю запрос к Ozon...")
-response = requests.get("https://ozon.ru", headers=headers)
+    context = browser.new_context(
+        viewport={'width': 1920, 'height': 1080},
+        user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
+    )
 
-if response.status_code == 200:
-    soup = BeautifulSoup(response.text, 'html.parser')
-    price_element = soup.find('span', {'data-testid': 'total-price'})
-    if price_element:
-        print("Цена:", price_element.text.strip())
-    else:
-        print("Код 200, но сработал Antibot Challenge (капча).")
-else:
-    print(f"Ошибка доступа. Код ответа: {response.status_code}")
+    page = context.new_page()
+    print("Открываю Ozon...")
+    page.goto("https://www.ozon.ru/product/koshachya-myata-sharik-igrushki-dlya-koshek-3168418801/", wait_until="domcontentloaded")
+    while page.title() == "Antibot Challenge Page":
+        time.sleep(1)
+
+    time.sleep(1)
+    soup = BeautifulSoup(page.content(), 'html.parser')
+    elements = soup.find_all('span', class_='tsHeadline600Large')
+    print("Цена:", elements[0].text)
+    browser.close()
