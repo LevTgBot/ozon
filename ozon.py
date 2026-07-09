@@ -11,7 +11,7 @@ stealth = Stealth()
 
 with sync_playwright() as p:
     stealth.use_sync(p)
-    browser = stealth_p.chromium.launch(
+    browser = p.chromium.launch(
     headless=False,
     proxy={
         "server": "http://93.77.191.156:8118"
