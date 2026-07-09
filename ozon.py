@@ -5,7 +5,6 @@ from bs4 import BeautifulSoup
 with sync_playwright() as p:
     browser = p.chromium.launch(
     headless=True,
-    headless_shell=False,# Для работы на сервере без экрана
     args=[
         "--disable-blink-features=AutomationControlled",
         "--no-sandbox",             # Обязательно для root в Linux
