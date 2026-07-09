@@ -3,6 +3,7 @@ from playwright_stealth import Stealth
 import time
 from bs4 import BeautifulSoup
 from pyvirtualdisplay import Display
+import os
 
 display = Display(visible=0, size=(1920, 1080))
 display.start()
@@ -10,6 +11,7 @@ display.start()
 stealth = Stealth()
 
 with sync_playwright() as p:
+    user_data_dir = os.path.join(os.getcwd(), "user_data")
     stealth.use_sync(p)
     browser = p.chromium.launch(
     headless=False,
