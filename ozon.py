@@ -4,8 +4,7 @@ from bs4 import BeautifulSoup
 
 with sync_playwright() as p:
     browser = p.chromium.launch(
-        headless=False,
-        channel="chrome",
+        headless=True,
         args=["--disable-blink-features=AutomationControlled"]
     )
     context = browser.new_context(
@@ -17,7 +16,8 @@ with sync_playwright() as p:
     print("Открываю Ozon...")
     page.goto("https://www.ozon.ru/product/koshachya-myata-sharik-igrushki-dlya-koshek-3168418801/", wait_until="domcontentloaded")
     while page.title() == "Antibot Challenge Page":
-        pass
+        time.sleep(1)
+
     time.sleep(1)
     soup = BeautifulSoup(page.content(), 'html.parser')
     elements = soup.find_all('span', class_='tsHeadline600Large')
