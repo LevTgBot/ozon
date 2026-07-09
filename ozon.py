@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 
 with sync_playwright() as p:
     browser = p.chromium.launch(
-        headless=True,
+        headless=False,
         args=["--disable-blink-features=AutomationControlled"]
     )
     context = browser.new_context(
