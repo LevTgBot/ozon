@@ -1,6 +1,11 @@
 from playwright.sync_api import sync_playwright
 import time
 from bs4 import BeautifulSoup
+from pyvirtualdisplay import Display
+
+display = Display(visible=0, size=(1920, 1080))
+display.start()
+
 
 with sync_playwright() as p:
     browser = p.chromium.launch(
@@ -20,12 +25,12 @@ with sync_playwright() as p:
     page = context.new_page()
     print("Открываю Ozon...")
     page.goto("https://www.ozon.ru/product/koshachya-myata-sharik-igrushki-dlya-koshek-3168418801/", wait_until="domcontentloaded")
-    print(page)
-    #while page.title() == "Antibot Challenge Page":
-    #    time.sleep(1)
+    while page.title() == "Antibot Challenge Page":
+        time.sleep(1)
 
-    #time.sleep(1)
-    #soup = BeautifulSoup(page.content(), 'html.parser')
-    #elements = soup.find_all('span', class_='tsHeadline600Large')
-    #print("Цена:", elements[0].text)
-    #browser.close()
+    time.sleep(1)
+    soup = BeautifulSoup(page.content(), 'html.parser')
+    elements = soup.find_all('span', class_='tsHeadline600Large')
+    print("Цена:", elements[0].text)
+    browser.close()
+    display.stop()
