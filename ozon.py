@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 
 with sync_playwright() as p:
     browser = p.chromium.launch(
-    headless=True,
+    headless=False,
     args=[
         "--disable-blink-features=AutomationControlled",
         "--no-sandbox",             # Обязательно для root в Linux
@@ -19,7 +19,7 @@ with sync_playwright() as p:
 
     page = context.new_page()
     print("Открываю Ozon...")
-    page.goto("https://www.google.com/", wait_until="domcontentloaded")
+    page.goto("https://www.ozon.ru/product/koshachya-myata-sharik-igrushki-dlya-koshek-3168418801/", wait_until="domcontentloaded")
     print(page)
     #while page.title() == "Antibot Challenge Page":
     #    time.sleep(1)
