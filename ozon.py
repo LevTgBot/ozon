@@ -10,6 +10,9 @@ display.start()
 with sync_playwright() as p:
     browser = p.chromium.launch(
     headless=False,
+    proxy={
+        "server": "http://93.77.191.156:8118"
+    },
     args=[
         "--disable-blink-features=AutomationControlled",
         "--no-sandbox",             # Обязательно для root в Linux
