@@ -34,6 +34,6 @@ with sync_playwright() as p:
     time.sleep(1)
     soup = BeautifulSoup(page.content(), 'html.parser')
     elements = soup.find_all('span', class_='tsHeadline600Large')
-    print("Цена:", elements[0].text)
+    print(elements.text)
     browser.close()
     display.stop()
