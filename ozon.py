@@ -1,6 +1,28 @@
 import asyncio
 from camoufox.async_api import AsyncCamoufox 
 from pyvirtualdisplay import Display
+import urllib.request
+
+def get_real_url(short_url):
+    # Настраиваем запрос, чтобы отключить автоматический редирект
+    req = urllib.request.Request(short_url)
+    try:
+        # Отправляем запрос и перехватываем ответ сервера
+        with urllib.request.urlopen(req) as response:
+            pass # Если редиректов не было (конечная точка)
+    except urllib.request.HTTPError as e:
+        # Сервер коротких ссылок возвращает статусы 301, 302, 307 или 308
+        if 300 <= e.code < 400:
+            return e.headers.get('Location')
+        return f"Ошибка HTTP: {e.code}"
+    except Exception as e:
+        return f"Произошла ошибка: {e}"
+    
+    return short_url
+
+# Пример использования
+url_to_check = 'https://clck.ru' # Замените на вашу ссылку
+final_url = get_real_url(url_to_check)
 
 # Выносим дисплей и браузер в глобальные переменные
 display = None
@@ -42,7 +64,7 @@ async def price(url):
         await page.route("**/*", lambda route: route.abort() if route.request.resource_type in ["image", "font", "media", "stylesheet"] else route.continue_())
         
         # Переходим на сайт (с таймаутом 20 секунд, чтобы не ждать вечно)
-        await page.goto(url)
+        await page.goto(get_real_url(url))
         
         # Быстрая проверка на антибот
         while await page.title() == "Antibot Challenge Page":
