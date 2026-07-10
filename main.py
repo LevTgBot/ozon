@@ -20,8 +20,8 @@ async def start(message: Message):
 @router.message()
 async def menu(message: Message):
     await message.answer(f"Ищу товар!")
-    price = await price(message.text)
-    await message.answer(f"Цена: {price}")
+    pric = await price(message.text)
+    await message.answer(f"Цена: {pric}")
     
 
 
