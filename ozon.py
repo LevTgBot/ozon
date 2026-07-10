@@ -12,7 +12,9 @@ with Camoufox(
 ) as browser:
     page = browser.new_page()
     page.goto("https://ozon.ru")
-
+    while page.title() == "Antibot Challenge Page":
+        time.sleep(1)
+        
     print(page.title())
     page.wait_for_timeout(10000)
 
