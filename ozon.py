@@ -13,11 +13,14 @@ with Camoufox(
     proxy={"server": "http://93.77.191.156:8118"}
 ) as browser:
     page = browser.new_page()
-    page.goto("https://ozon.ru")
+    page.goto("https://www.ozon.ru/product/koshachya-myata-sharik-igrushki-dlya-koshek-3168418801/")
     while page.title() == "Antibot Challenge Page":
         time.sleep(1)
         
     print(page.title())
-    page.wait_for_timeout(10000)
+    time.sleep(1)
+    soup = BeautifulSoup(page.content(), 'html.parser')
+    elements = soup.find_all('span', class_='tsHeadline600Large')
+    print("Цена:", elements[0].text)
 
     display.stop()
