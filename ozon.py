@@ -1,4 +1,4 @@
-from camoufox.sync_api import Camoufox
+from camoufox.async_api import AsyncCamoufox 
 from pyvirtualdisplay import Display
 import time
 from bs4 import BeautifulSoup
@@ -10,7 +10,7 @@ async def price(url):
 
 
     # Camoufox сам сгенерирует идеальные отпечатки реального пользователя
-    async with Camoufox(
+    async with AsyncCamoufox(
         headless=False,
         proxy={"server": "http://93.77.191.156:8118"},
         geoip=True
