@@ -8,7 +8,8 @@ display.start()
 # Camoufox сам сгенерирует идеальные отпечатки реального пользователя
 with Camoufox(
     headless=False,
-    proxy={"server": "http://ip:port"}
+    proxy={"server": "http://ip:port"},
+    geoip=True
 ) as browser:
     page = browser.new_page()
     page.goto("https://ozon.ru")
