@@ -18,7 +18,7 @@ async def start(message: Message):
 
 @router.message()
 async def menu(message: Message):
-    await message.answer(f"Ищу товар:{message}")
+    await message.answer(f"Ищу товар:{message.text}")
 
 
 dp = Dispatcher()
