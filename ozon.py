@@ -42,7 +42,7 @@ async def price(url):
         await page.route("**/*", lambda route: route.abort() if route.request.resource_type in ["image", "font", "media", "stylesheet"] else route.continue_())
         
         # Переходим на сайт (с таймаутом 20 секунд, чтобы не ждать вечно)
-        await page.goto(url, timeout=20000)
+        await page.goto(url)
         
         # Быстрая проверка на антибот
         while await page.title() == "Antibot Challenge Page":
