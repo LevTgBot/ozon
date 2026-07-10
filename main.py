@@ -6,6 +6,7 @@ from dotenv import load_dotenv
 from aiogram.types import (
     Message
 )
+from ozon import price
 
 load_dotenv()
 
@@ -18,7 +19,9 @@ async def start(message: Message):
 
 @router.message()
 async def menu(message: Message):
-    await message.answer(f"Ищу товар:{message.text}")
+    await message.answer(f"Ищу товар!")
+    await message.answer(f"Цена: {price(message.text)}")
+    
 
 
 dp = Dispatcher()
