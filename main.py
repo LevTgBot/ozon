@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 from aiogram.types import (
     Message
 )
-from ozon import price
+from ozon import price, close_browser, init_browser
 
 load_dotenv()
 
