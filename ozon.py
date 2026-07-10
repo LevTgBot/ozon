@@ -53,7 +53,7 @@ async def price(url):
         price_element = page.locator('span.tsHeadline600Large').first
         
         # Ждем элемент максимум 5 секунд
-        await price_element.wait_for(state="attached", timeout=5000)
+        await price_element.wait_for(state="attached", timeout=1000)
         
         result_price = await price_element.text_content()
         return result_price.strip()
