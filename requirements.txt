@@ -1,3 +1,4 @@
 camoufox
 pyvirtualdisplay
 playwright==1.49.0
+camoufox[geoip]
