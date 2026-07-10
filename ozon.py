@@ -16,7 +16,7 @@ def price(url):
         geoip=True
     ) as browser:
         page = browser.new_page()
-        page.goto("https://www.ozon.ru/product/koshachya-myata-sharik-igrushki-dlya-koshek-3168418801/")
+        page.goto(url)
         while page.title() == "Antibot Challenge Page":
             time.sleep(1)
         
