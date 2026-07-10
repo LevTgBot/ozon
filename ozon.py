@@ -1,5 +1,7 @@
 from camoufox.sync_api import Camoufox
 from pyvirtualdisplay import Display
+import time
+
 display = Display(visible=0, size=(1920, 1080))
 display.start()
 
