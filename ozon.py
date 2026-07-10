@@ -3,20 +3,20 @@ from pyvirtualdisplay import Display
 import time
 from bs4 import BeautifulSoup
 
-def price(url):
+async def price(url):
     display = Display(visible=0, size=(1920, 1080))
     display.start()
 
 
 
     # Camoufox сам сгенерирует идеальные отпечатки реального пользователя
-    with Camoufox(
+    async with Camoufox(
         headless=False,
         proxy={"server": "http://93.77.191.156:8118"},
         geoip=True
     ) as browser:
-        page = browser.new_page()
-        page.goto(url)
+        page = await browser.new_page()
+        await page.goto(url)
         while page.title() == "Antibot Challenge Page":
             time.sleep(1)
         
