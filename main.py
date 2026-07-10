@@ -22,16 +22,23 @@ async def menu(message: Message):
     await message.answer(f"Ищу товар!")
     pric = await price(message.text)
     await message.answer(f"Цена: {pric}")
-    
+
+
 
 
 dp = Dispatcher()
+
+@dp.shutdown()
+async def on_shutdown(bot: Bot):
+    await close_browser()
+    print("Браузер успешно закрыт.")
+
 dp.include_routers(router)
 
 
 async def main():
     bot = Bot(token=TOKEN)
-
+    await init_browser()
     print("Start")
 
     await dp.start_polling(bot)
