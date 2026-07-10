@@ -1,6 +1,7 @@
 from camoufox.sync_api import Camoufox
 from pyvirtualdisplay import Display
 import time
+from bs4 import BeautifulSoup
 
 display = Display(visible=0, size=(1920, 1080))
 display.start()
@@ -10,7 +11,8 @@ display.start()
 # Camoufox сам сгенерирует идеальные отпечатки реального пользователя
 with Camoufox(
     headless=False,
-    proxy={"server": "http://93.77.191.156:8118"}
+    proxy={"server": "http://93.77.191.156:8118"},
+    geoip=True
 ) as browser:
     page = browser.new_page()
     page.goto("https://www.ozon.ru/product/koshachya-myata-sharik-igrushki-dlya-koshek-3168418801/")
