@@ -9,7 +9,8 @@ display.start()
 with Camoufox(
     headless=False,
     proxy={"server": "http://ip:port"},
-    geoip=True
+    timezone="Europe/Moscow", 
+    locale="ru-RU"
 ) as browser:
     page = browser.new_page()
     page.goto("https://ozon.ru")
